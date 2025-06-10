@@ -1,10 +1,12 @@
+import { useState } from "react"
+
 interface ContainerProps {
   nome:string
 }
 function Container(props:ContainerProps){
-  let texto = "Texto Antes de Mudar"
+  const [texto,setTexto] = useState("Texto Antes de Mudar") 
   function mudar(){
-    texto = "Texto Depois de Mudar"
+    setTexto("Texto Depois de Mudar")
   }
   return(
     <>

@@ -1,18 +1,28 @@
 import { useState } from "react"
-
-interface ContainerProps {
-  nome:string
+interface ProdutosState {
+  id:number,
+  nome:string,
+  preco:number,
+  categoria:string
 }
-function Container(props:ContainerProps){
-  const [texto,setTexto] = useState("Texto Antes de Mudar") 
-  function mudar(){
-    setTexto("Texto Depois de Mudar")
-  }
+
+function Container(){
+  const [produtos,setProdutos] = useState<ProdutosState[]>([]) 
+
   return(
     <>
-      <h1>{props.nome}</h1>
-      <p>{texto}</p>
-      <button onClick={mudar}>Mudar</button>
+      <div className="container-cadastro">
+        <form>
+          <input type="text" name="id" id="id" />
+          <input type="text" name="nome" id="nome" />
+          <input type="text" name="preco" id="preco" />
+          <input type="text" name="categoria" id="categoria" />
+          <input type="submit" value="Cadastrar" />
+        </form>
+      </div>
+      <div className="contaner-listagem">
+
+      </div>
     </>
   )
 }

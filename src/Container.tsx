@@ -21,8 +21,13 @@ function Container() {
   ])
   function trataForm(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    //Pegar os dados que a pessoa está cadastrando no formulário
-    //inserir isso no Array de produtos.
+    const produtoNovo:ProdutosState = {
+      id:parseInt(id),
+      nome,
+      preco:parseFloat(preco),
+      categoria
+    }
+    setProdutos([...produtos,produtoNovo])
 
   }
   function trataId(event:React.ChangeEvent<HTMLInputElement>){

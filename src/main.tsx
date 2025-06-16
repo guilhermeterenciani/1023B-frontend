@@ -8,6 +8,6 @@ import Container from './Container.tsx'
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Header/>
-    <Container nome='Body'/>
+    <Container/>
   </StrictMode>,
 )

@@ -11,13 +11,18 @@ function Container() {
   const [id,setId] = useState("")
   const [nome,setNome] = useState("")
   const [preco,setPreco] = useState("")
+  const [erroMensagem,setErroMensagem] = useState("")
   const [categoria,setCategoria] = useState("")
   const [produtos, setProdutos] = useState<ProdutosState[]>([])
   useEffect(()=>{
       const fetchData = async ()=>{
-        const resposta = await fetch("http://localhost:8000/produtos")
-        const result = await resposta.json()
-        setProdutos(result)
+        try{
+          const resposta = await fetch("http://localhost:8000/produtos")
+          const result = await resposta.json()
+          setProdutos(result)
+        }catch(erro:any){
+            setErroMensagem("Erro ao Realizar o fetch no backend")
+        }
       }
       fetchData()
   },[]) //[] =>Lista de dependências
@@ -49,7 +54,14 @@ function Container() {
   }
   return (
     <>
+      {erroMensagem &&
+        <div className="mensagem-erro">
+            <p>{erroMensagem}</p>
+        </div>
+      }
+      
       <div className="container">
+        
         <div className="container-cadastro">
           <h1>Cadastro Produto</h1>
           <form onSubmit={trataForm}>

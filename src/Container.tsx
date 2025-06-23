@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import './Container.css'
 interface ProdutosState {
   id: number,
@@ -12,14 +12,18 @@ function Container() {
   const [nome,setNome] = useState("")
   const [preco,setPreco] = useState("")
   const [categoria,setCategoria] = useState("")
-  const [produtos, setProdutos] = useState<ProdutosState[]>([
-    {
-      id: 1,
-      nome: "Computador",
-      preco: 3500,
-      categoria: "Informática"
-    }
-  ])
+  const [produtos, setProdutos] = useState<ProdutosState[]>([])
+  useEffect(()=>{
+      const fetchData = async ()=>{
+        const resposta = await fetch("http://localhost:8000/produtos")
+        const result = await resposta.json()
+        setProdutos(result)
+      }
+      fetchData()
+  },[]) //[] =>Lista de dependências
+  //Quando a lista de dependências estiver vazia.
+  //Significará que será executado quando carregar a página.
+
   function trataForm(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const produtoNovo:ProdutosState = {
